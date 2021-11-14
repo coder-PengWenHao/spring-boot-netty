@@ -6,14 +6,11 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 import lombok.extern.slf4j.Slf4j;
-
-
 /***
  *  服务端处理器
  */
 @Slf4j
 public class MyServerHandler extends ChannelInboundHandlerAdapter {
-
 
     /**
      * 获取客户端的消息
