@@ -11,29 +11,17 @@ import lombok.extern.slf4j.Slf4j;
 public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 
 
-    /***
-     * 连接上服务的回调
-     * @param ctx
-     * @throws Exception
-     */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        log.info("连接上服务器.....");
-        ctx.writeAndFlush(Unpooled.copiedBuffer("哈哈 你好呀!!!", CharsetUtil.UTF_8));
+        //发送消息到服务端
+        ctx.writeAndFlush(Unpooled.copiedBuffer("歪比巴卜~茉莉~Are you good~马来西亚~", CharsetUtil.UTF_8));
     }
 
-
-    /**
-     * 读取服务端返回的消息
-     *
-     * @param ctx
-     * @param msg
-     * @throws Exception
-     */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        ByteBuf buf = (ByteBuf) msg;
-        log.info("服务端返回的消息:" + buf.toString(CharsetUtil.UTF_8));
+        //接收服务端发送过来的消息
+        ByteBuf byteBuf = (ByteBuf) msg;
+        System.out.println("收到服务端" + ctx.channel().remoteAddress() + "的消息：" + byteBuf.toString(CharsetUtil.UTF_8));
     }
 
 }
