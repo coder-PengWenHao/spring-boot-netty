@@ -23,8 +23,18 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
 
-        ByteBuf byteBuf = (ByteBuf) msg;
-        log.info("收到客户端" + ctx.channel().remoteAddress() + "发送的消息为:" + byteBuf.toString(CharsetUtil.UTF_8));
+        //  taskQueue任务队列
+        ctx.channel().eventLoop().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    log.info("当前业务需要处理，请耐心等待");
+                } catch (Exception e) {
+                    log.error("错误信息为:" + e.getMessage());
+                }
+            }
+        });
 
     }
 
