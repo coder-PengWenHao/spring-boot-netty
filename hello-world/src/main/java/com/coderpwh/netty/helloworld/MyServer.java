@@ -15,10 +15,14 @@ public class MyServer {
 
     public static void main(String[] args) {
 
+        /**
+         * 创建两个线程组
+         */
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
         try {
+            // 创建服务端启动对象
             ServerBootstrap bootstrap = new ServerBootstrap();
 
             bootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
@@ -32,13 +36,16 @@ public class MyServer {
                     });
             System.out.println("java技术爱好者的服务端已经准备就绪...");
 
+            // 绑定端口号
             ChannelFuture channelFuture = bootstrap.bind(6666).sync();
 
+            // 对关闭通道进行监听
             channelFuture.channel().closeFuture().sync();
 
         } catch (Exception e) {
             log.error("异常为:{}", e.getMessage());
         } finally {
+            // 关闭线程
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }
