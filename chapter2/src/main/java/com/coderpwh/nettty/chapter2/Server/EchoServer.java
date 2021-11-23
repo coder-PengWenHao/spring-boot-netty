@@ -17,6 +17,7 @@ import java.net.InetSocketAddress;
 @Slf4j
 public class EchoServer {
 
+     
     private final int port;
 
 
@@ -61,11 +62,16 @@ public class EchoServer {
                         }
                     });
 
+            ChannelFuture f = b.bind().sync();
+
+            log.info(EchoServer.class.getName() +
+                    " started and listening for connections on " + f.channel().localAddress());
+
+            f.channel().closeFuture().sync();
 
         } catch (Exception e) {
             log.info("当前错误信息为:{}", e.getMessage());
         } finally {
-
             group.shutdownGracefully().sync();
         }
 
