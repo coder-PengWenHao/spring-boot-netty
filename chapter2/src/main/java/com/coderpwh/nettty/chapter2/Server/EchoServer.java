@@ -25,7 +25,17 @@ public class EchoServer {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+
+        if (args.length != 1) {
+            log.info("Usage" + EchoServer.class.getSimpleName() + "<port>");
+            return;
+        }
+
+        int port = Integer.parseInt(args[0]);
+
+        new EchoServer(port).start();
+
 
     }
 
@@ -60,6 +70,7 @@ public class EchoServer {
         }
 
     }
+
 
 
 }
