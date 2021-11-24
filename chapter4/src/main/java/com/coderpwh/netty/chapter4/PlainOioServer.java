@@ -1,4 +1,4 @@
-package com.coderpwh.netty.chapter4;
+ package com.coderpwh.netty.chapter4;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -9,6 +9,8 @@ import java.net.Socket;
 import java.nio.charset.Charset;
 
 /**
+ * 阻塞式OIO(非netty方式)
+ *
  * @author pengwenhao
  * @date 2021/11/24
  */
